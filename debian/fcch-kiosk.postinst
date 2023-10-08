@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Copyright 2023 Stephen Warren <swarren@wwwdotorg.org>
+# SPDX-License-Identifier: MIT
+
+set -e
+
+setup_user() {
+    if ! getent passwd fcchkiosk >/dev/null; then
+        adduser --quiet --system --group --no-create-home --home /opt/fcch/kiosk --shell /usr/sbin/nologin fcchkiosk
+    fi
+    usermod -a -G tty fcchkiosk
+    usermod -a -G video fcchkiosk
+}
+
+setup_perms() {
+    chgrp -R fcchkiosk /opt/fcch/kiosk/var
+    chmod -R g+w /opt/fcch/kiosk/var
+}
+
+if [ "$1" = configure ]; then
+    setup_user
+    setup_perms
+fi
+
+#DEBHELPER#

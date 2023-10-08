@@ -1,0 +1,15 @@
+[Unit]
+Description=FCCH Kiosk Web Control Interface
+
+[Service]
+Type=exec
+User=fcchkiosk
+Group=fcchkiosk
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+ExecStart=/opt/fcch/kiosk/bin/fcch-kiosk.web.sh
+KillMode=control-group
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,18 @@
+[Unit]
+Description=FCCH Kiosk Display
+
+[Service]
+Type=exec
+User=fcchkiosk
+Group=fcchkiosk
+AmbientCapabilities=CAP_SYS_TTY_CONFIG
+After=console-getty.service
+ExecStart=/opt/fcch/kiosk/bin/fcch-kiosk.display.sh
+ExecStop=/opt/fcch/kiosk/bin/fcch-kiosk.display-stop.sh
+TimeoutStopSec=30
+KillMode=control-group
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

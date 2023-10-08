@@ -1,0 +1,4 @@
+30 https://fortcollinscreatorhub.wildapricot.org/signage-welcome
+30 https://fortcollinscreatorhub.wildapricot.org/signage-classes
+30 https://www.fortcollinscreatorhub.org/all-areas-calendar-week/
+30 https://www.fortcollinscreatorhub.org/all-areas-calendar-list/

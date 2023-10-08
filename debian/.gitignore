@@ -1,0 +1,7 @@
+.debhelper/
+debhelper-build-stamp
+fcch-kiosk.debhelper.log
+fcch-kiosk.postrm.debhelper
+fcch-kiosk.substvars
+fcch-kiosk/
+files

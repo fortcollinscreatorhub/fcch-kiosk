@@ -1,0 +1,27 @@
+<!--
+# Copyright 2023 Stephen Warren <swarren@wwwdotorg.org>
+# SPDX-License-Identifier: MIT
+-->
+<html>
+    <head>
+        <title>FCCH Kiosk Control</title>
+    </head>
+    <script src="main.js"></script>
+    <body onLoad="onLoadBody()">
+        <div>
+            <button id="bPrev" onClick="onClickPrev()"><< Prev</button> | 
+            <button id="bNext" onClick="onClickNext()">Next >></button> | 
+            <button id="bDebugOn" onClick="onClickDebugOn()">Debug On</button> | 
+            <button id="bDebugOff" onClick="onClickDebugOff()">Debug Off</button>
+        </div>
+        <div>&nbsp;</div>
+        <div>URL configuration:</div>
+        <div>
+            <div>
+                <button id="bLoad" onClick="onClickLoad()">Load</button> | 
+                <button id="bSave" onClick="onClickSave()">Save</button>
+            </div>
+            <textarea id="txtUrls" rows="16" cols="80">Loading...</textarea>
+        </div>
+    </body>
+</html>

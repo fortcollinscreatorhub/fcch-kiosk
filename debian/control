@@ -1,0 +1,20 @@
+# Copyright 2023 Stephen Warren <swarren@wwwdotorg.org>
+# SPDX-License-Identifier: MIT
+
+Source: fcch-kiosk
+Section: misc
+Priority: optional
+Maintainer: Stephen Warren <swarren@wwwdotorg.org>
+Build-Depends:
+ , debhelper (>= 9)
+Standards-Version: 4.2.1
+
+Package: fcch-kiosk
+Architecture: all
+Section: misc
+Depends:
+ , gunicorn
+ , python3-flask
+ , python3-pyqt6.qtwebengine
+ , ${misc:Depends}
+Description: An "web kiosk" application; displays a series of URLs in sequence.

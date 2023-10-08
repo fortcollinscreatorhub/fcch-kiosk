@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+# Copyright 2023 Stephen Warren <swarren@wwwdotorg.org>
+# SPDX-License-Identifier: MIT
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/fcch-kiosk
+	dh_installsystemd --name=display
+	dh_installsystemd --name=web
