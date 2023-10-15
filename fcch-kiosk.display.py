@@ -44,6 +44,7 @@ class KioskWindow(QWidget):
 
     def initUI(self):
         self.layout = QVBoxLayout()
+        self.layout.setContentsMargins(0, 0, 0, 0)
         self.webEngineView = QWebEngineView()
         self.layout.addWidget(self.webEngineView, stretch=True)
         self.statusText = QLabel('Status')
