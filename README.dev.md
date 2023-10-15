@@ -9,6 +9,9 @@ dpkg-buildpackage -us -uc && \
     ssh swarren@192.168.63.192 sudo dpkg -i /tmp/fcch-kiosk_1_all.deb
 ```
 
-Once testing is comlete, upload the package to
-https://www.fortcollinscreatorhub.org/rpi-packages/fcch-kiosk_1_all.deb
-.
+Once testing is comlete, upload the package to our website, for easy access
+from Pis during setup:
+
+```shell
+scp ../fcch-kiosk_1_all.deb fcch-web:/home/u930-v2vbn3xb6dhb/www/fortcollinscreatorhub.org/public_html/rpi-packages
+```
