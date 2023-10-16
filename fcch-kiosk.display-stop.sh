@@ -5,7 +5,7 @@
 
 script_dir=$(dirname "$0")
 
-echo -n Q > "${script_dir}/var/control.pipe"
+echo -n Q > "${script_dir}/../var/control.pipe"
 while true; do
   pids=$(pidof -x fcch-kiosk.display.sh)
   if [ -z "${pids}" ]; then
