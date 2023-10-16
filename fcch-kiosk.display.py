@@ -12,8 +12,9 @@ import sys
 import threading
 import time
 import traceback
-from PyQt6.QtCore import Qt, QTimer, QUrl, pyqtSignal
-from PyQt6.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout
+from PyQt6.QtGui import QGuiApplication
+from PyQt6.QtCore import Qt, QRect, QTimer, QUrl, pyqtSignal
+from PyQt6.QtWidgets import QApplication, QGraphicsScene, QGraphicsView, QLabel, QWidget, QVBoxLayout
 from PyQt6.QtWebEngineWidgets import QWebEngineView
 
 TIME_URL_ERROR = 10000
@@ -43,13 +44,52 @@ class KioskWindow(QWidget):
         self.initSignals()
 
     def initUI(self):
+        self.webEngineView = QWebEngineView()
+        self.statusText = QLabel('Status')
+
         self.layout = QVBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
-        self.webEngineView = QWebEngineView()
         self.layout.addWidget(self.webEngineView, stretch=True)
-        self.statusText = QLabel('Status')
         self.layout.addWidget(self.statusText)
-        self.setLayout(self.layout)
+
+        with open('/sys/class/graphics/fbcon/rotate', 'rt') as f:
+            fbrotate = f.read()
+            rotate = 90 * int(fbrotate)
+
+        if rotate == 0:
+            self.w = None
+            self.topLayout = self.layout
+        else:
+            self.w = QWidget()
+            self.w.setLayout(self.layout)
+
+            self.scene = QGraphicsScene()
+            self.scene.addWidget(self.w)
+
+            self.view = QGraphicsView()
+            self.view.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.view.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+            self.view.setScene(self.scene)
+            self.view.rotate(rotate)
+
+            self.topLayout = QVBoxLayout()
+            self.topLayout.setContentsMargins(0, 0, 0, 0)
+            self.topLayout.addWidget(self.view, stretch=True)
+
+        self.setLayout(self.topLayout)
+        self.setCursor(Qt.CursorShape.BlankCursor)
+
+        screenGeom = QGuiApplication.primaryScreen().geometry()
+        print('screenGeom', screenGeom, file=sys.stderr)
+        if self.w is not None:
+            if rotate in (90, 270):
+                w = screenGeom.width()
+                h = screenGeom.height()
+                (w, h) = (h, w)
+                screenGeom.setWidth(w)
+                screenGeom.setHeight(h)
+            self.w.setGeometry(screenGeom)
+        self.setGeometry(screenGeom)
 
     def initTimers(self):
         self.timerUrl = QTimer()
@@ -251,7 +291,6 @@ def main():
 
     app = QApplication(sys.argv)
     window = KioskWindow(args.urls_file)
-    window.setCursor(Qt.CursorShape.BlankCursor)
     window.show()
     api = KioskApiThread(args.control_pipe, window)
     api.start()
@@ -259,5 +298,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-

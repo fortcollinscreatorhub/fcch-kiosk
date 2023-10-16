@@ -49,3 +49,81 @@ after a reboot.
 
 Visit `http://fcch-kiosk-main.local/` to configure which URLs the kiosk should
 display.
+
+# Overscan compensation
+
+There are 3 different time periods and places to account for display rotation:
+
+1) During early Linux boot, before the main display driver is loaded.
+
+This can be controlled via the following options in `/boot/config.txt`.
+However, they don't seem to work, at least when display rotation is enabled:
+
+```
+disable_overscan=0
+overscan_top=-32
+overscan_bottom=-32
+overscan_left=-32
+overscan_right=-32
+```
+
+Note that these overscan values are not the same units as the values described
+in the next section. I'm not sure what the units are.
+
+2) During Linux console text display.
+
+This can be controlled by editing `/boot/cmdline.txt` to add the following
+option to the end of the command-line:
+
+```
+video=HDMI-A-1:D,margin_left=32,margin_right=32,margin_top=32,margin_bottom=32
+```
+
+Edit the margin values as appropriate for your display. These units are
+probably physical display pixels.
+
+3) During execution of the fcch-kiosk application.
+
+This configuration automatically follows the margin values specified in
+`/boot/cmdline.txt`.
+
+# Display rotation
+
+There are 3 different time periods and places to account for display rotation:
+
+1) During early Linux boot, before the main display driver is loaded.
+
+This can be controlled editing `/boot/config.txt` to add option
+`display_rotate`. However, the firmware appears to parse `/boot/cmdline.txt`
+and automatically adapt, so editing `/boot/config.txt` is not necessary.
+
+2) During Linux console text display.
+
+This can be controlled by editing `/boot/cmdline.txt` to add the following
+option to the end of the command-line:
+
+No rotation (of the physical display device):
+```
+fbcon=rotate:0
+```
+
+Rotation 90 CCW / 270 CW:
+```
+fbcon=rotate:1
+```
+
+Rotation 180 CCW / 180 CW:
+```
+fbcon=rotate:2
+```
+
+Rotation 270 CCW / 90 CW:
+```
+fbcon=rotate:3
+```
+
+3) During execution of the fcch-kiosk application.
+
+This configuration automatically follows the rotation value specified in
+`/boot/cmdline.txt`, or whatever FB rotation is applied to VT7 when the
+application starts.
