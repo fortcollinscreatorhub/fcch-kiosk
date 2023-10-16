@@ -1,3 +1,12 @@
+fcch-kiosk (2) focal; urgency=medium
+
+  * Remove margin from display layout.
+  * Fix bug in display stop script.
+  * Support display rotation in display code.
+  * Describe how to configure display rotation in README.
+
+ -- Stephen Warren <swarren@wwwdotorg.org>  Sun, 15 Oct 2023 23:49:56 -0600
+
 fcch-kiosk (1) focal; urgency=medium
 
   * Initial version.
