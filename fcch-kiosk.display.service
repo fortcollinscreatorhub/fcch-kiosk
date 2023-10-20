@@ -6,7 +6,6 @@ Type=exec
 User=fcchkiosk
 Group=fcchkiosk
 AmbientCapabilities=CAP_SYS_TTY_CONFIG
-After=console-getty.service
 ExecStart=/opt/fcch/kiosk/bin/fcch-kiosk.display.sh
 ExecStop=/opt/fcch/kiosk/bin/fcch-kiosk.display-stop.sh
 TimeoutStopSec=30
