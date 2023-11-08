@@ -40,6 +40,7 @@ chvt 7
 disable_cursor_blink
 
 export QT_QPA_PLATFORM=linuxfb
+export PYTHONPATH="${root_dir}/lib/python${PYTHONPATH:+:${PYTHONPATH}}"
 # Don't exec, so the EXIT trap runs
 "${script_dir}/fcch-kiosk.display.py" \
     --urls-file "${root_dir}/var/urls.txt" \

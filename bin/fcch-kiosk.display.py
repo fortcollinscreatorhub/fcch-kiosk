@@ -6,6 +6,7 @@
 import argparse
 from dataclasses import dataclass
 import errno
+import fcchkiosk
 import os
 import subprocess
 import sys
@@ -167,32 +168,14 @@ class KioskWindow(QWidget):
         self.statusText.setVisible(True)
         self.timerDebug.start(TIME_DEBUG_UPDATE)
 
-    def bToS(self, b):
-        try:
-            s = b.decode('utf-8')
-        except:
-            traceback.print_exc(file=sys.stderr)
-            s = ''
-        s = s.strip()
-        return s
-
     def updateDebugText(self):
-        text = 'Status | IP '
-        cp = subprocess.run(['nmcli', '-g', 'IP4.ADDRESS', 'device', 'show', 'wlan0'], capture_output=True)
-        ip = self.bToS(cp.stdout)
-        if ip:
+        hasIp, text = fcchkiosk.getStatusText()
+        if hasIp:
             if self.initialDebugClearAt == 0:
                 self.initialDebugClearAt = time.time() + TIME_INITIAL_DEBUG
                 # FIXME: Perhaps keep the timer running always, and do this
                 # any time the IP changes?
                 self.displayCurrentURL()
-        else:
-            ip = '??'
-        text += ip
-        text += ' | http://'
-        cp = subprocess.run(['hostname'], capture_output=True)
-        text += self.bToS(cp.stdout)
-        text += '.local/'
         self.statusText.setText(text)
 
     def setDebugOff(self):

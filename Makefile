@@ -22,6 +22,8 @@ install:
 	install -m 644 web/index.html $(DESTDIR)/opt/fcch/kiosk/web/
 	install -m 644 web/main.js $(DESTDIR)/opt/fcch/kiosk/web/
 	# Must be in /lib not /opt/fcch/kiosk/lib for some reason?
+	install -D -d $(DESTDIR)/opt/fcch/kiosk/lib/python/
+	install -m 644 lib/python/fcchkiosk.py $(DESTDIR)/opt/fcch/kiosk/lib/python/
 	install -D -d $(DESTDIR)/lib/systemd/system/
 	install -m 644 lib/systemd/system/fcch-kiosk.display.service $(DESTDIR)/lib/systemd/system/
 	install -m 644 lib/systemd/system/fcch-kiosk.web.service $(DESTDIR)/lib/systemd/system/
