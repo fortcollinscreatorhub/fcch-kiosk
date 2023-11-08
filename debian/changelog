@@ -1,3 +1,10 @@
+fcch-kiosk (3) focal; urgency=medium
+
+  * Add status text to web page.
+  * Remove invalid key from systemd unit files.
+
+ -- Stephen Warren <swarren@wwwdotorg.org>  Tue, 07 Nov 2023 21:31:15 -0700
+
 fcch-kiosk (2) focal; urgency=medium
 
   * Remove margin from display layout.
