@@ -4,8 +4,9 @@
 # SPDX-License-Identifier: MIT
 
 script_dir=$(dirname "$0")
+root_dir=$(realpath "${script_dir}/..")
 
-echo -n Q > "${script_dir}/../var/control.pipe"
+echo -n Q > "${root_dir}/var/control.pipe"
 while true; do
   pids=$(pidof -x fcch-kiosk.display.sh)
   if [ -z "${pids}" ]; then
@@ -13,4 +14,3 @@ while true; do
   fi
   sleep 1
 done
-

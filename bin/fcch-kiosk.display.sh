@@ -34,6 +34,7 @@ cleanup() {
 }
 
 script_dir=$(dirname "$0")
+root_dir=$(realpath "${script_dir}/..")
 trap cleanup EXIT
 chvt 7
 disable_cursor_blink
@@ -41,5 +42,5 @@ disable_cursor_blink
 export QT_QPA_PLATFORM=linuxfb
 # Don't exec, so the EXIT trap runs
 "${script_dir}/fcch-kiosk.display.py" \
-    --urls-file "${script_dir}/../var/urls.txt" \
-    --control-pipe "${script_dir}/../var/control.pipe"
+    --urls-file "${root_dir}/var/urls.txt" \
+    --control-pipe "${root_dir}/var/control.pipe"
