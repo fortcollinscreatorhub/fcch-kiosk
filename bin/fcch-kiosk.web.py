@@ -4,9 +4,11 @@
 # SPDX-License-Identifier: MIT
 
 import argparse
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, render_template, request
+import fcchkiosk
 import gunicorn.app.base
 import traceback
+import subprocess
 import sys
 
 parser = argparse.ArgumentParser(
@@ -20,7 +22,8 @@ args = parser.parse_args()
 app = Flask(
     __name__,
     static_url_path='', 
-    static_folder=args.web_dir,
+    static_folder=args.web_dir + '/static',
+    template_folder=args.web_dir + '/templates',
 )
 
 def send_cmd(cmd):
@@ -42,7 +45,8 @@ def catch_except(f):
 
 @app.route("/")
 def root():
-    return app.send_static_file('index.html')
+    (_, status_text) = fcchkiosk.getStatusText()
+    return render_template('index.html', status_text=status_text)
 
 @app.route("/api/debug-on", methods=['POST'])
 @catch_except

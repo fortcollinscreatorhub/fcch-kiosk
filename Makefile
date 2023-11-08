@@ -18,9 +18,10 @@ install:
 	install -m 755 bin/fcch-kiosk.web.py $(DESTDIR)/opt/fcch/kiosk/bin/
 	install -D -d $(DESTDIR)/opt/fcch/kiosk/var/
 	install -m 644 var/urls.txt $(DESTDIR)/opt/fcch/kiosk/var/
-	install -D -d $(DESTDIR)/opt/fcch/kiosk/web/
-	install -m 644 web/index.html $(DESTDIR)/opt/fcch/kiosk/web/
-	install -m 644 web/main.js $(DESTDIR)/opt/fcch/kiosk/web/
+	install -D -d $(DESTDIR)/opt/fcch/kiosk/web/static/
+	install -m 644 web/static/main.js $(DESTDIR)/opt/fcch/kiosk/web/static
+	install -D -d $(DESTDIR)/opt/fcch/kiosk/web/templates/
+	install -m 644 web/templates/index.html $(DESTDIR)/opt/fcch/kiosk/web/templates/
 	# Must be in /lib not /opt/fcch/kiosk/lib for some reason?
 	install -D -d $(DESTDIR)/opt/fcch/kiosk/lib/python/
 	install -m 644 lib/python/fcchkiosk.py $(DESTDIR)/opt/fcch/kiosk/lib/python/
