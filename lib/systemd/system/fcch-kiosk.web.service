@@ -1,5 +1,8 @@
 [Unit]
 Description=FCCH Kiosk Web Control Interface
+StartLimitAction=reboot
+StartLimitIntervalSec=300
+StartLimitBurst=5
 
 [Service]
 Type=exec
