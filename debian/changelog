@@ -1,3 +1,9 @@
+fcch-kiosk (4) focal; urgency=medium
+
+  * Reboot on repeated service failures.
+
+ -- Stephen Warren <swarren@wwwdotorg.org>  Sun, 03 Dec 2023 21:47:54 -0700
+
 fcch-kiosk (3) focal; urgency=medium
 
   * Add status text to web page.
