@@ -9,6 +9,8 @@ build:
 
 .PHONY: install
 install:
+	install -D -d $(DESTDIR)/etc/sudoers.d/
+	install -m 644 etc/sudoers.d/fcch_kiosk $(DESTDIR)/etc/sudoers.d/fcch_kiosk
 	# Must be in /lib not /opt/fcch/kiosk/lib for some reason?
 	install -D -d $(DESTDIR)/lib/systemd/system/
 	install -m 644 lib/systemd/system/fcch-kiosk.display.service $(DESTDIR)/lib/systemd/system/

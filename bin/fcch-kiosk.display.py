@@ -45,7 +45,10 @@ class KioskWindow(QWidget):
         self.initSignals()
 
     def initUI(self):
+        self.loadErrors = 0
         self.webEngineView = QWebEngineView()
+        self.webEngineView.loadFinished.connect(self.onLoadFinished)
+
         self.statusText = QLabel('Status')
 
         self.layout = QVBoxLayout()
@@ -115,6 +118,25 @@ class KioskWindow(QWidget):
         self.sigReloadConfig.connect(self.onReloadConfig)
         self.sigNextURL.connect(self.onNextURL)
         self.sigPrevURL.connect(self.onPrevURL)
+
+    def onLoadFinished(self, ok):
+        if ok:
+            doPrint = self.loadErrors != 0
+            self.loadErrors = 0
+        else:
+            doPrint = True
+            self.loadErrors += 1
+        if doPrint:
+            print("loadErrors", self.loadErrors, file=sys.stderr)
+        if len(self.urls):
+            maxErrors = len(self.urls)
+        else:
+            maxErrors = 5
+        if self.loadErrors > maxErrors:
+            # The load error detection process happens too slowly to simply
+            # exit, have systemd detect repeated exits, and reboot. Thus,
+            # explicitly force a reboot here.
+            os.system('sudo /usr/sbin/reboot')
 
     def onTimerUrl(self):
         self.nextUrl()
