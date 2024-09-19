@@ -1,3 +1,9 @@
+fcch-kiosk (6) focal; urgency=medium
+
+  * Turn off console syslog output.
+
+ -- Stephen Warren <swarren@wwwdotorg.org>  Wed, 18 Sep 2024 20:14:57 -0600
+
 fcch-kiosk (5) focal; urgency=medium
 
   * Reboot if many URLs fail to load in series.
