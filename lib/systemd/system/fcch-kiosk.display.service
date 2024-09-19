@@ -9,6 +9,8 @@ Type=exec
 User=fcchkiosk
 Group=fcchkiosk
 AmbientCapabilities=CAP_SYS_TTY_CONFIG
+# Prevent any console logs over-writing the UI
+ExecStartPre=+dmesg -D
 ExecStart=/opt/fcch/kiosk/bin/fcch-kiosk.display.sh
 ExecStop=/opt/fcch/kiosk/bin/fcch-kiosk.display-stop.sh
 TimeoutStopSec=30
