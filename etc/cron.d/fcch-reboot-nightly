@@ -1,0 +1,2 @@
+# 04:00 AM nightly
+0 4 * * * root /usr/sbin/reboot

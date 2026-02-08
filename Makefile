@@ -1,4 +1,4 @@
-# Copyright 2023 Stephen Warren <swarren@wwwdotorg.org>
+# Copyright 2023-2026 Stephen Warren <swarren@wwwdotorg.org>
 # SPDX-License-Identifier: MIT
 
 .PHONY: default
@@ -11,6 +11,8 @@ build:
 install:
 	install -D -d $(DESTDIR)/etc/sudoers.d/
 	install -m 644 etc/sudoers.d/fcch_kiosk $(DESTDIR)/etc/sudoers.d/fcch_kiosk
+	install -D -d $(DESTDIR)/etc/cron.d/
+	install -m 644 etc/cron.d/fcch-reboot-nightly $(DESTDIR)/etc/cron.d/fcch-reboot-nightly
 	# Must be in /lib not /opt/fcch/kiosk/lib for some reason?
 	install -D -d $(DESTDIR)/lib/systemd/system/
 	install -m 644 lib/systemd/system/fcch-kiosk.display.service $(DESTDIR)/lib/systemd/system/
