@@ -32,8 +32,8 @@ Install the fcch-kiosk package:
 
 ```shell
 cd /tmp
-wget https://www.fortcollinscreatorhub.org/rpi-packages/fcch-kiosk_6_all.deb
-sudo apt install ./fcch-kiosk_6_all.deb
+wget https://www.fortcollinscreatorhub.org/rpi-packages/fcch-kiosk_7_all.deb
+sudo apt install ./fcch-kiosk_7_all.deb
 ```
 
 The kiosk display will automatically start; it will initially draw a black
